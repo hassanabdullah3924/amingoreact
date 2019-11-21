@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import NavBar from "./NavBar";
+import Jumbotron from "./Jumbotron";
+import Feed from './Feed';
+import "./App.css";
 
-function App() {
+
+const posts = [
+  {
+    title: "The Title",
+    lead: "Welcome to ABC.com, the biggest platform for the alphabet.",
+    moreInfo: "Click here to learn more about learning ABC"
+  },
+  {
+    title: "Another Title",
+    lead: "Welcome to ABC.com, the biggest platform for the alphabet.",
+    moreInfo: "Click here to learn more about learning ABC"
+  },
+  {
+    title: "And One More",
+    lead: "Welcome to ABC.com, the biggest platform for the alphabet.",
+    moreInfo: "Click here to learn more about learning ABC"
+  }
+]
+
+const App = () => {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar logo={logo} />
+      <Jumbotron 
+        title="The Title"
+        lead="Welcome to ABC.com, the biggest platform for the alphabet."
+        moreInfo="Click here to learn more about learning ABC"
+        buttonLabel="Start"
+      />
+
+      <div className="container">
+        
+  
+              (post)=><Feed 
+                image={post.image}
+                title={post.title}
+                description={post.description}
+                buttonLabel="Read more"
+              />
+            )
+        }
+        
+      </div>
     </div>
   );
-}
+};
 
 export default App;

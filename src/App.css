@@ -20,3 +20,14 @@
 .App-link {
   color: #09d3ac;
 }
+
+.card {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+.card img {
+  background: darkgray;
+  min-height: 200px;
+}
