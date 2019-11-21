@@ -5,7 +5,6 @@ import Jumbotron from "./Jumbotron";
 import Feed from './Feed';
 import "./App.css";
 
-
 const posts = [
   {
     title: "The Title",
@@ -26,6 +25,9 @@ const posts = [
 
 const App = () => {
 
+
+  const isLoading = false;
+
   return (
     <div className="App">
       <NavBar logo={logo} />
@@ -33,15 +35,19 @@ const App = () => {
         title="The Title"
         lead="Welcome to ABC.com, the biggest platform for the alphabet."
         moreInfo="Click here to learn more about learning ABC"
-        buttonLabel="Start"
+        buttonLabel="Sign up!"
       />
 
       <div className="container">
         
-  
+        {
+            isLoading && <p>Loading...</p>
+        }
+        {
+            !isLoading && posts.map(
               (post)=><Feed 
                 image={post.image}
-                title={post.title}
+                title={post.Title}
                 description={post.description}
                 buttonLabel="Read more"
               />
