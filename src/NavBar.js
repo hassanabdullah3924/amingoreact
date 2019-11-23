@@ -1,7 +1,10 @@
 import React from 'react';
 import LoginButton from './LoginButton'
-
+import AppContext from './AppContext'
 const NavBar = (prop) => {
+
+  const [globalState, setGlobalState] = useContext (AppContext);
+
     return (
       <nav className="navbar navbar-light bg-light">
         <a className="navbar-brand">
