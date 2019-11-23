@@ -49,7 +49,7 @@ const App = () => {
                 image={post.image}
                 title={post.Title}
                 description={post.description}
-                buttonLabel="Read more"
+                buttonLabel={post.buttonLabel}
               />
             )
         }

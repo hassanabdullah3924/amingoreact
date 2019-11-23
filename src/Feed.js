@@ -7,7 +7,7 @@ const Feed = ({image, title, description, buttonLabel}) => {
             <div className="card-body">
                 <h5 className="card-title">Nature</h5>
                 <p className="card-text">{description}</p>
-                <a href="https://www.medicinenet.com/running/article.htm" target="_blank" className="btn btn-primary">{buttonLabel}</a>
+                <a href="https://www.medicinenet.com/running/article.htm" target="_blank" className="btn btn-primary">Read more</a>
             </div>
         </div>
     )
