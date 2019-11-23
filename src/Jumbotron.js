@@ -7,29 +7,30 @@ function validateEmail(email) {
 
 const Jumbotron = ({title, lead, moreInfo, buttonLabel}) => {
 
-    let emailField;
+    let emailField; 
 
     const [state, setState] = useState({
-        registration: 'start'
+        registration: 'start' 
     }) //Array
 
     const registerUser = () => {
-        if(validateEmail(emailField.value)) {
+        if(validateEmail(emailField.value)) { 
          setState({...state, registration: "correct"})
         } else {
             setState({...state, registration: "incorrect"})
         }
     }
 
-    return(
+    return( 
         <div className="jumbotron">
             <h1 className="display-4">{title}</h1>
             <p className="lead">{lead}</p>
             <hr className="my-4" />
             <p>{moreInfo}</p>
-
-            <div className="input-group" style={{width: '600px', margin: '0 auto'}}>
-                <input ref={(elem)=>emailField = elem} type="text" className="form-control"/>
+                
+            <div className="input-group" style={{width: '600px', margin: '0 auto'}}> 
+                <input ref={(elem)=>emailField = elem} type="text" className="form-control"/> 
+        
                 <button 
                 onClick={registerUser}
                 className="btn btn-primary" href="#" role="button">
@@ -38,13 +39,13 @@ const Jumbotron = ({title, lead, moreInfo, buttonLabel}) => {
             </div>
 
             { 
-                state.registration === "correct" && <div class="alert alert-success" role="alert" style={{width: '600px', margin: '10px auto'}}>
+                state.registration === "correct" && <div className="alert alert-success" role="alert" style={{width: '600px', margin: '10px auto'}}>
                     You have been successfully registered!
                 </div> 
             }
 
             { 
-                state.registration === "incorrect" && <div class="alert alert-danger" role="alert" style={{width: '600px', margin: '10px auto'}}>
+                state.registration === "incorrect" && <div className="alert alert-danger" role="alert" style={{width: '600px', margin: '10px auto'}}>
                     You have entered an incorrect email address!
                 </div> 
             }   

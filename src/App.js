@@ -1,55 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import NavBar from "./NavBar";
 import Jumbotron from "./Jumbotron";
 import Feed from './Feed';
+import RegistrationForm from './RegistrationForm';
 import "./App.css";
 
-
-const posts = [
-  {
-    title: "The Title",
-    lead: "Welcome to ABC.com, the biggest platform for the alphabet.",
-    moreInfo: "Click here to learn more about learning ABC"
-  },
-  {
-    title: "Another Title",
-    lead: "Welcome to ABC.com, the biggest platform for the alphabet.",
-    moreInfo: "Click here to learn more about learning ABC"
-  },
-  {
-    title: "And One More",
-    lead: "Welcome to ABC.com, the biggest platform for the alphabet.",
-    moreInfo: "Click here to learn more about learning ABC"
-  }
-]
+import AppContext from './AppContext'
 
 const App = () => {
 
-  return (
-    <div className="App">
-      <NavBar logo={logo} />
-      <Jumbotron 
-        title="The Title"
-        lead="Welcome to ABC.com, the biggest platform for the alphabet."
-        moreInfo="Click here to learn more about learning ABC"
-        buttonLabel="Start"
-      />
-
-      <div className="container">
-        
-  
-              (post)=><Feed 
-                image={post.image}
-                title={post.title}
-                description={post.description}
-                buttonLabel="Read more"
-              />
-            )
+   const [state, setState] = useState(
+        {
+            posts: [],
+            postsLoaded: false,
+            loadMore: false
         }
-        
-      </div>
-    </div>
+   )
+
+   const [globalState, setGlobalState] = useState(
+       {
+           user: {},
+           loggedIn: 'false'
+       }
+   )
+  
+   useEffect(()=>{
+        if(!state.postsLoaded) {
+            // Make fetch request to backend
+            fetch('http://localhost:3001/feed/all')
+            // Run .json() to convert the backend response
+            .then(response => response.json())
+            // Change the state for posts array
+            .then(json=>{
+                setState({ 
+                    ...state, 
+                    posts: json,
+                    postsLoaded: true
+                })
+            })
+            .catch(e=>console.log('error', e))
+        }
+   });
+
+  return (
+        <AppContext.Provider value={[globalState, setGlobalState]}>
+            <div className="App">
+            <NavBar logo={logo} />
+            <Jumbotron 
+                title="The Newsletter"
+                lead="Welcome to ABC.com, the biggest platform for the alphabet."
+                moreInfo="Click here to learn more about learning ABC"
+                buttonLabel="Signup"
+            />
+
+            <h1>{globalState.loggedIn}</h1>
+            <RegistrationForm />
+            </div>
+        </AppContext.Provider>
   );
 };
 

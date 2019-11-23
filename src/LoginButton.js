@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from './AppContext';
 
 const LoginButton = () => {
 
@@ -9,6 +10,8 @@ const LoginButton = () => {
         }
     )
 
+    const [globalState, setGlobalState] = useContext(AppContext);
+
     const loginHandler = () => {
         if(state.status === 'logged-in') {
             setState({
@@ -16,12 +19,23 @@ const LoginButton = () => {
                 status: 'logged-out',
                 label: 'Log In'
             });
+
+            setGlobalState({
+                ...globalState,
+                loggedIn: 'false'
+            })
+
         } else {
             setState({
                 ...state, 
                 status: 'logged-in',
                 label: 'Log Out'
             });
+
+            setGlobalState({
+                ...globalState,
+                loggedIn: 'true'
+            })
         }
         
     }
