@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import NavBar from "./NavBar";
 import Jumbotron from "./Jumbotron";
 import Feed from './Feed';
-import RegistrationForm from './RegistrationForm';
+import RegistrationForm from './RegistrationForm'; // The App does show it that's why
 import "./App.css";
 
 import AppContext from './AppContext'
