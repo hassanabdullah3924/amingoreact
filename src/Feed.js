@@ -1,13 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Feed = ({image, title, description, buttonLabel}) => {
+const Feed = ({_id, image, title, description, buttonLabel}) => {
+
+    const [state, setState] = useState(
+        {
+            label: buttonLabel,
+        }
+    );
+
+
+    const like = async () => {
+
+        setState({ ...state, label: 'Loading...' });
+
+        let response = await fetch('http://localhost:3001/feed/addlike', {
+            method: 'POST',
+            body: JSON.stringify({
+                feedid: _id
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '.concat(sessionStorage.getItem('jwt'))
+            }
+        });
+
+        let json = await response.json();
+
+        setState({ ...state, label: 'Unlike' })
+
+        // console.log('response from backend', json)
+    }
+
     return(
         <div className="card">
-            <img src="https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2018/natureinstee.jpg" className="card-img-top" alt={description} />
+            <img src={image} className="card-img-top" alt={description} />
             <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <p className="card-text">{description}</p>
-                <a href="#" className="btn btn-primary">{buttonLabel}</a>
+                <button 
+                    onClick={like} 
+                    className="btn btn-primary"
+                >
+                    {state.label}
+                </button>
             </div>
         </div>
     )

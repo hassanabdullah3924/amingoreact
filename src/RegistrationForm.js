@@ -41,10 +41,10 @@ const RegistrationForm = () => {
         return errors;
     }
 
-    const registerUser = () => {
+    const registerUser = async () => {
         if(validateForm().length === 0) {
             // Step 1. Configure fetch and post data to amingo
-            fetch('http://localhost:3001/users/register', {
+            let response = await fetch('http://localhost:3000/users/register', {
                 method: 'POST',
                 body: JSON.stringify(
                     {
@@ -58,15 +58,20 @@ const RegistrationForm = () => {
                 headers: {
                     "Content-Type": "application/json"
                 }
-            })
-            // Step 2. Convert response to json
-            .then((response)=>response.json())
-
-            // Step 3. Handle the json data
-            .then(json=>{
-                console.log('response from amingo', json)
-                setState({ ...state, registrationSuccess: true, errors: []})
             });
+
+            let json = await response.json();   
+
+            console.log('response from amingo', json)
+            setState({ ...state, registrationSuccess: true, errors: []})
+            // // Step 2. Convert response to json
+            // .then((response)=>response.json())
+
+            // // Step 3. Handle the json data
+            // .then(json=>{
+            //     console.log('response from amingo', json)
+            //     setState({ ...state, registrationSuccess: true, errors: []})
+            // });
         }
     }
 
@@ -75,7 +80,7 @@ const RegistrationForm = () => {
             <div className="form-group">
                 <label for="firstName">First Name</label>
                 <input 
-                    ref={(elem)=>firstName = elem}
+                    ref={(inputElem)=>firstName = inputElem}
                     type="text" 
                     className="form-control" 
                     id="firstName" 
@@ -85,7 +90,7 @@ const RegistrationForm = () => {
             <div className="form-group">
                 <label for="lastName">Last Name</label>
                 <input 
-                    ref={(elem)=>lastName = elem}
+                    ref={(inputElem)=>lastName = inputElem}
                     type="text" 
                     className="form-control" 
                     id="lastName" 
@@ -95,7 +100,7 @@ const RegistrationForm = () => {
             <div className="form-group">
                 <label for="exampleInputEmail1">Email address</label>
                 <input 
-                    ref={(elem)=>email = elem}
+                    ref={(inputElem)=>email = inputElem}
                     type="email" 
                     className="form-control" 
                     id="exampleInputEmail1" 
@@ -111,7 +116,7 @@ const RegistrationForm = () => {
             <div className="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input 
-                    ref={(elem)=>password = elem}
+                    ref={(inputElem)=>password = inputElem}
                     type="password" 
                     className="form-control" 
                     id="exampleInputPassword1" 
@@ -121,7 +126,7 @@ const RegistrationForm = () => {
             <div className="form-group">
                 <label for="occupation">Occupation (optional)</label>
                 <input 
-                    ref={(elem)=>occupation = elem}
+                    ref={(inputElem)=>occupation = inputElem}
                     type="text" 
                     className="form-control" 
                     id="occupation" 
@@ -130,7 +135,7 @@ const RegistrationForm = () => {
             </div>
             <div className="form-group form-check">
                 <input 
-                    ref={(elem)=>termsConditions = elem}
+                    ref={(inputElem)=>termsConditions = inputElem}
                     type="checkbox" 
                     className="form-check-input" 
                     id="exampleCheck1" 
@@ -141,13 +146,13 @@ const RegistrationForm = () => {
                 I accept the Terms &amp; Conditions
                 </label>
             </div>
-            {
-                !state.registrationSuccess &&
-            <button 
-                type="submit" 
-                className="btn btn-primary"
-                onClick={registerUser}
-            >Submit</button>
+            
+            { 
+                !state.registrationSuccess && 
+                <button 
+                    type="submit" 
+                    className="btn btn-primary"
+                    onClick={registerUser}>Submit</button> 
             }
 
             {  state.errors.length > 0 &&

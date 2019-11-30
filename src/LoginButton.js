@@ -23,7 +23,7 @@ const LoginButton = () => {
             setGlobalState({
                 ...globalState,
                 loggedIn: 'false'
-            })
+            });
 
         } else {
             setState({
@@ -35,7 +35,7 @@ const LoginButton = () => {
             setGlobalState({
                 ...globalState,
                 loggedIn: 'true'
-            })
+            });
         }
         
     }
@@ -44,6 +44,8 @@ const LoginButton = () => {
         <button onClick={loginHandler} className="btn btn-primary">
             { state.label }
         </button>
+        
+    
     )
 }
 
