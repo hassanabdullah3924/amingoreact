@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'; // useContext is global state
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import logo from "./logo.svg";
 import './App.css'
 import App from './App'
@@ -45,7 +45,8 @@ const Main = () => {
         {
             userid: sessionStorage.getItem('userid') ? sessionStorage.getItem('userid') : null,
             loggedIn: sessionStorage.getItem('jwt') ? 'true' : 'false',
-            sidebarOpen: false
+            sidebarOpen: false,
+            postsLoaded: false,
              // We check if they are in the jwt
             // If there session is stored in the brower we know they are logged
         }

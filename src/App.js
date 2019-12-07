@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
+import PostComment from "./PostComment"
 import Jumbotron from "./Jumbotron";
 import Feed from './Feed';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
+
 
 
 import AppContext from './AppContext' // Allows us to have access to global state
@@ -12,8 +14,8 @@ const App = () => {
    const [state, setState] = useState(
         {
             posts: [],
-            postsLoaded: false,
-            loadMore: false
+            loadMore: false,
+            timestamp: null,
         }
    )
 
@@ -21,7 +23,7 @@ const App = () => {
 
   
    useEffect(()=>{ // useEffect stops react from going over the code over and over again
-        if(!state.postsLoaded) { 
+        if(!globalState.postsLoaded) { 
             // Make fetch request to backend
             fetch('http://localhost:3001/feed/all')
 
@@ -33,8 +35,13 @@ const App = () => {
                 setState({  // Makes react go over the code once more 
                     ...state, 
                     posts: json,
-                    postsLoaded: true
+                    
                 });
+
+                setGlobalState({
+                    ...globalState,
+                    postsLoaded:true
+                })
 
                 console.log(json)
             })
@@ -54,7 +61,7 @@ const App = () => {
                 buttonLabel="Signup"
             />
            
-          
+          { globalState.loggedIn === 'true' && <PostComment />}
             
             { globalState.loggedIn !== 'true' && <LoginForm />}
 
@@ -74,6 +81,10 @@ const App = () => {
                             />
                         )
                     }
+                    <center>
+                    <button className="btn btn-primary">Load More</button>
+                </center>
+            
                 </div>
             }
             </div>

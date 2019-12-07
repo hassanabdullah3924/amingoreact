@@ -1,5 +1,5 @@
 .App {
-  /* text-align: center; */
+   text-align: center; 
 }
 
 .App-logo {
@@ -81,6 +81,12 @@
 .overlay.open{
   
   opacity: 0.5s;
+}
+.post-comment {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: darkgrey;
 }
 
 footer {
